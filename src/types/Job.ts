@@ -1,0 +1,35 @@
+export interface Job {
+  id: number;
+  orderId: number;
+  jobTypeId: string;
+  jobPriorityId: string;
+  jobStatusId: string;
+  technicianId: number;
+  createdDate: string;
+  createdTime: string;
+  scheduledStartDate?: string;
+  scheduledStartTime?: string;
+  scheduledEndDate?: string;
+  scheduledEndTime?: string;
+  arrivalDate?: string;
+  arrivalTime?: string;
+  completionDate?: string;
+  completionTime?: string;
+  assignedDate?: string;
+  assignedTime?: string;
+  requiredStartDate?: string;
+  requiredStartTime?: string;
+  requiredEndDate?: string;
+  requiredEndTime?: string;
+  travelDistanceKm?: number;
+  estimatedTimeMinutes?: number;
+  centerId: string;
+  createdBy: number;
+  assignedBy: number;
+  appointmentId?: number | null;
+  relatedJobId?: number | null;
+  createdAt: string;
+  updatedAt: string;
+  description?: string;
+  locationAddress?: string;
+}

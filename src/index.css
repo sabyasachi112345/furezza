@@ -1,0 +1,297 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* Custom CSS for the FieldOps Pro application */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Gantt chart specific styles */
+.gantt-container {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+.gantt-row:hover {
+  background-color: #f9fafb;
+}
+
+.gantt-cell {
+  min-height: 60px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.gantt-bar {
+  cursor: move;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gantt-bar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.gantt-bar-content {
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Job card animations */
+.job-card {
+  transition: all 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Modal animations */
+.modal-overlay {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.status-completed {
+  background-color: #10b981;
+  color: white;
+}
+
+.status-in-progress {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.status-scheduled {
+  background-color: #f59e0b;
+  color: white;
+}
+
+/* Priority borders */
+.priority-high {
+  border-left-color: #ef4444;
+  border-left-width: 4px;
+}
+
+.priority-medium {
+  border-left-color: #f59e0b;
+  border-left-width: 4px;
+}
+
+.priority-low {
+  border-left-color: #10b981;
+  border-left-width: 4px;
+}
+
+/* Time tracking button styles */
+.time-tracking-btn {
+  transition: all 0.2s ease;
+}
+
+.time-tracking-btn:hover {
+  transform: scale(1.05);
+}
+
+.time-tracking-active {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.time-tracking-inactive {
+  background-color: #f0fdf4;
+  color: #16a34a;
+}
+
+/* Map view styles */
+.map-container {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.map-marker {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.map-marker:hover {
+  transform: scale(1.25);
+}
+
+/* Tab navigation styles */
+.tab-button {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tab-button:hover {
+  transform: translateY(-1px);
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #3b82f6;
+  border-radius: 1px;
+}
+
+/* Search input styles */
+.search-input {
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+/* Stats card hover effects */
+.stats-card {
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Loading spinner */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+  .gantt-container {
+    font-size: 12px;
+  }
+  
+  .gantt-cell {
+    min-width: 60px;
+  }
+  
+  .job-card {
+    padding: 12px;
+  }
+  
+  .modal-content {
+    margin: 16px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    font-size: 12px;
+  }
+  
+  .gantt-container {
+    overflow: visible;
+  }
+}
+
+/* Focus styles for accessibility */
+.focus\:outline-custom:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Dark mode support (if needed in future) */
+@media (prefers-color-scheme: dark) {
+  /* Dark mode styles can be added here */
+}
