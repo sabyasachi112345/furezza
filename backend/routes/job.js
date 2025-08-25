@@ -1,4 +1,4 @@
-// server.js or routes/jobs.js
+// server.js or routes/jobs.js     
 import express from "express";
 import multer from "multer";
 
@@ -20,3 +20,6 @@ router.post("/api/jobs/upload", upload.single("file"), async (req, res) => {
 });
 
 export default router;
+
+
+

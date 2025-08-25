@@ -1,36 +1,55 @@
 // backend/routes/upload.js
-import express from 'express';
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
+import express from "express";
+import multer from "multer";
+import path from "path";
+import fs from "fs";
+import mysql from "mysql2/promise";
 
 const router = express.Router();
 
-// Ensure uploads directory exists
-const uploadDir = path.resolve('uploads');
+const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
 
-// Multer storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
+  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
 });
 
 const upload = multer({ storage });
 
-// Route to handle file upload
-router.post("/", upload.single("file"), (req, res) => {
+// MySQL connection
+const pool = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "jobs_db",
+});
+
+router.post("/", upload.single("file"), async (req, res) => {
+  const { title, description } = req.body;
+
   if (!req.file) {
     return res.status(400).json({ error: "No file uploaded" });
   }
 
-  res.status(200).json({
-    message: "✅ File uploaded successfully",
-    filename: req.file.filename,
-    path: `/uploads/${req.file.filename}`
-  });
+  try {
+    const filePath = `/uploads/${req.file.filename}`;
+    await pool.query(
+      "INSERT INTO jobs (title, description, filePath) VALUES (?, ?, ?)",
+      [title, description, filePath]
+    );
+
+    res.status(200).json({
+      message: "✅ File uploaded and saved to database successfully",
+      filename: req.file.filename,
+      path: filePath,
+    });
+  } catch (error) {
+    console.error("Database insert error:", error);
+    res.status(500).json({ error: "Failed to save file info to database" });
+  }
 });
 
 export default router;

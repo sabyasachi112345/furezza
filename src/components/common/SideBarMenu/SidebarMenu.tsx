@@ -290,6 +290,10 @@ import {
   ClipboardList, Clock3, UserPlus, Share2, X
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+<Link to="/user-role-management">User Role Management</Link>
+
 
 // ---------- Modal: Job Feedback ----------
 const FeedbackFormModal = ({ onSubmit, onClose }) => {
@@ -471,10 +475,11 @@ const SideBarMenu = ({ showMenuButton = true }) => {
     {
       title: "MANAGEMENT",
       items: [
-        { label: "Jobs", icon: <Briefcase size={14} />, route: "/jobs" },
-        { label: "Technicians", icon: <Users size={14} />, route: "/technicians" },
-        { label: "Customers", icon: <Building size={14} />, route: "/customers" },
-        { label: "Job Completion/Feedback", icon: <ClipboardList size={14} />, route: "/job-feedback" },
+        { label: "Jobs", icon: <Briefcase size={18} />, route: "/jobs" },
+  { label: "Technicians", icon: <Users size={18} />, route: "/technicians" },
+  { label: "Customers", icon: <Building size={18} />, route: "/customers" },
+  { label: "User Role Management", icon: <Building size={18} />, route: "/user-role-management" },
+  { label: "Job Completion/Feedback", icon: <ClipboardList size={18} />, route: "/job-feedback" },
       ],
     },
    

@@ -532,3 +532,7 @@ export const mockJobs: Job[] = [
     { id: 19, username: 'logan.allen', email: 'logan.allen@fieldservices.com', passwordHash: '$2a$10$example19', firstName: 'Logan', lastName: 'Allen', name: 'Logan Allen', phone: '+1234567908', role: 'TECHNICIAN', status: 'INACTIVE', assignedJobs: [] },
     { id: 20, username: 'grace.king', email: 'grace.king@fieldservices.com', passwordHash: '$2a$10$example20', firstName: 'Grace', lastName: 'King', name: 'Grace King', phone: '+1234567909', role: 'TECHNICIAN', status: 'ACTIVE', assignedJobs: [13, 14] },
   ];
+
+
+
+  

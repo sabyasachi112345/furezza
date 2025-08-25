@@ -1,4 +1,3 @@
-// src/components/layout/DashboardLayout.tsx
 import React from 'react';
 import Header from '../common/Header';
 import GanttChart from '../gantt/GanttChart';
@@ -7,14 +6,13 @@ import MapView from '../map/MapView';
 import JobDetailModal from '../jobs/JobDetailModal';
 import { Job, Technician, JobStatus, StatCardKey, DateRangeConfig } from '../../types';
 
-interface Props {
+interface DashboardLayoutProps {
   useMockData: boolean;
   stats: {
     total: number;
     IN_PROGRESS: number;
     COMPLETED: number;
     SCHEDULED: number;
-    onUnassignJob?: (jobId: number) => void; // <-- Added for unassignment
   };
   jobsForGanttChart: Job[];
   jobsForJobList: Job[];
@@ -29,9 +27,10 @@ interface Props {
   onJobSelect: (job: Job | null) => void;
   selectedJob: Job | null;
   onJobDrop: (jobId: number, targetDatetime: string) => void;
+  onUnassignJob?: (jobId: number) => void;
 }
 
-const DashboardLayout: React.FC<Props> = ({
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   useMockData,
   stats,
   jobsForGanttChart,
@@ -94,7 +93,7 @@ const DashboardLayout: React.FC<Props> = ({
                   onJobSelect={onJobSelect}
                   globalSearchTerm={searchTerm}
                   dateRangeConfig={dateRangeConfig}
-                  // onUnassignJob={onUnassignJob} // <-- Added for unassignment
+                  onUnassignJob={onUnassignJob}
                 />
               </div>
             </div>
@@ -117,6 +116,9 @@ const DashboardLayout: React.FC<Props> = ({
         <JobDetailModal
           job={selectedJob}
           onClose={() => onJobSelect(null)}
+          open={!!selectedJob}
+          technicians={technicians}
+          onJobUpdate={onJobUpdate}
         />
       )}
     </div>
